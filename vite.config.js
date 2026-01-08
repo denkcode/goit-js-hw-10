@@ -16,8 +16,8 @@ export default defineConfig(({ command }) => ({
     rollupOptions: {
       input: {
         index: './index.html',
-        timer: './src/1-timer.html',
-        snackbar: './src/2-snackbar.html',
+        timer: './1-timer.html',
+        snackbar: './2-snackbar.html',
       },
       output: {
         // Всі JS у корінь dist, щоб шляхи у HTML працювали на GitHub Pages

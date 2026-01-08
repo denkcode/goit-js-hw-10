@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!stateInput) return;
     const state = stateInput.value;
 
+    form.reset();
+
     const promise = new Promise((resolve, reject) => {
       setTimeout(() => {
         if (state === "fulfilled") {
@@ -45,3 +47,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 });
+

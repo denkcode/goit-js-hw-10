@@ -1,47 +1,41 @@
 import { defineConfig } from 'vite';
-import { glob } from 'glob';
 import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
 
-export default defineConfig(({ command }) => {
-  return {
-    define: {
-      [command === 'serve' ? 'global' : '_global']: {},
-    },
-    base: '/goit-js-hw-10/',
-    root: 'src',
-    build: {
-      sourcemap: true,
-      rollupOptions: {
-        input: glob.sync('./src/*.html'),
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          },
-          entryFileNames: chunkInfo => {
-            if (chunkInfo.name === 'commonHelpers') {
-              return 'commonHelpers.js';
-            }
-            return '[name].js';
-          },
-          assetFileNames: assetInfo => {
-            if (assetInfo.name && assetInfo.name.endsWith('.html')) {
-              return '[name].[ext]';
-            }
-            return 'assets/[name]-[hash][extname]';
-          },
-        },
+export default defineConfig(({ command }) => ({
+  // Базовий шлях: dev -> '/', build -> '/goit-js-hw-10/'
+  base: command === 'serve' ? '/' : '/goit-js-hw-10/',
+
+  define: {
+    [command === 'serve' ? 'global' : '_global']: {},
+  },
+
+  build: {
+    sourcemap: true,
+    outDir: 'dist',        // Папка для збірки
+    emptyOutDir: true,     // Очищати dist перед build
+    rollupOptions: {
+      // Точки входу — всі HTML
+      input: {
+        index: './index.html',               // якщо index у корені
+        timer: './src/1-timer.html',        // інші сторінки в src
+        snackbar: './src/2-snackbar.html',
       },
-      outDir: '../dist',
-      emptyOutDir: true,
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) return 'vendor';
+        },
+        entryFileNames: chunkInfo =>
+          chunkInfo.name === 'commonHelpers' ? 'commonHelpers.js' : '[name].js',
+        assetFileNames: assetInfo =>
+          assetInfo.name?.endsWith('.html') ? '[name].[ext]' : 'assets/[name]-[hash][extname]',
+      },
     },
-    plugins: [
-      FullReload(['./src/**/**.html']),
-      SortCss({
-        sort: 'mobile-first',
-      }),
-    ],
-  };
-});
+  },
+
+  plugins: [
+    // Авто-перезавантаження для всіх HTML
+    FullReload(['./*.html', './src/*.html']),
+    SortCss({ sort: 'mobile-first' }),
+  ],
+}));

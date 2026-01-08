@@ -1,3 +1,7 @@
+
+import "../css/styles.css";
+import "../css/snackbar.css";
+
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 

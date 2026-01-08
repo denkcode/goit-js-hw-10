@@ -1,6 +1,4 @@
 
-import "../css/styles.css";
-import "../css/timer.css";
 
 
 import flatpickr from "flatpickr";

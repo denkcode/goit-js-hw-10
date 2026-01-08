@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Snackbar</title>
-    <link rel="stylesheet" href="./css/styles.css" />
-    <script type="module" crossorigin src="/goit-js-hw-10/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
-    <script type="module" crossorigin src="/goit-js-hw-10/assets/vendor-BZoxUzx5.js"></script>
-    <script type="module" crossorigin src="/goit-js-hw-10/assets/2-snackbar-Cp-7Ltu3.js"></script>
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/2-snackbar-DdaAyXEO.css">
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/vendor-DRAOUfWK.css">
-  </head>
-  <body>
-    <form class="form">
-  <label>
-    Delay (ms)
-    <input type="number" name="delay" required />
-  </label>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snackbar</title>
+  <script type="module" crossorigin src="/goit-js-hw-10/snackbar.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-B5Qt9EMX.js">
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-BZoxUzx5.js">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/vendor-DRAOUfWK.css">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/styles-DhyszreB.css">
+  <link rel="stylesheet" crossorigin href="/goit-js-hw-10/assets/snackbar-DdaAyXEO.css">
+</head>
+<body>
 
-  <fieldset>
-    <legend>State</legend>
+  <form class="form">
     <label>
-      <input type="radio" name="state" value="fulfilled" required />
-      Fulfilled
+      Delay (ms)
+      <input type="number" name="delay" required />
     </label>
-    <label>
-      <input type="radio" name="state" value="rejected" required />
-      Rejected
-    </label>
-  </fieldset>
 
-  <button class="submit">Create notification</button>
-</form>
-  </body>
+    <fieldset>
+      <legend>State</legend>
+      <label>
+        <input type="radio" name="state" value="fulfilled" required />
+        Fulfilled
+      </label>
+      <label>
+        <input type="radio" name="state" value="rejected" required />
+        Rejected
+      </label>
+    </fieldset>
+
+    <button class="submit">Create notification</button>
+  </form>
+
+
+</body>
 </html>

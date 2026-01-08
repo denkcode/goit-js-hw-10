@@ -3,7 +3,6 @@ import FullReload from 'vite-plugin-full-reload';
 import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => ({
-  // Базовий шлях: dev -> '/', build -> '/goit-js-hw-10/'
   base: command === 'serve' ? '/' : '/goit-js-hw-10/',
 
   define: {
@@ -12,29 +11,27 @@ export default defineConfig(({ command }) => ({
 
   build: {
     sourcemap: true,
-    outDir: 'dist',        // Папка для збірки
-    emptyOutDir: true,     // Очищати dist перед build
+    outDir: 'dist',
+    emptyOutDir: true,
     rollupOptions: {
-      // Точки входу — всі HTML
       input: {
-        index: './index.html',               // якщо index у корені
-        timer: './src/1-timer.html',        // інші сторінки в src
+        index: './index.html',
+        timer: './src/1-timer.html',
         snackbar: './src/2-snackbar.html',
       },
       output: {
+        // Всі JS у корінь dist, щоб шляхи у HTML працювали на GitHub Pages
+        entryFileNames: '[name].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash][extname]',
         manualChunks(id) {
           if (id.includes('node_modules')) return 'vendor';
         },
-        entryFileNames: chunkInfo =>
-          chunkInfo.name === 'commonHelpers' ? 'commonHelpers.js' : '[name].js',
-        assetFileNames: assetInfo =>
-          assetInfo.name?.endsWith('.html') ? '[name].[ext]' : 'assets/[name]-[hash][extname]',
       },
     },
   },
 
   plugins: [
-    // Авто-перезавантаження для всіх HTML
     FullReload(['./*.html', './src/*.html']),
     SortCss({ sort: 'mobile-first' }),
   ],
